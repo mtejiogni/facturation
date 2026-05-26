@@ -1,5 +1,5 @@
 drop database if exists facturationdb;
-create database facturationdb character set uft8;
+create database facturationdb character set utf8;
 use facturationdb;
 
 create table facture (
