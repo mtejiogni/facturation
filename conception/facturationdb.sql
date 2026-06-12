@@ -13,3 +13,7 @@ create table facture (
     datefacture date,
     primary key (idfacture)
 );
+
+insert into facture (reference, client, telephone, produit, pu, qte, datefacture)
+values 
+("INSAM02", "TOTO", "693909121", "Clé USB", 2000, 1, "2026-05-29");

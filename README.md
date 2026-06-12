@@ -6,10 +6,10 @@
 
 ## ⚙️ Outils techniques
 
-HTML5 -- Pour la structure des pages
-CSS3 -- Pour la mise en forme et le resonsive web design
-JS -- Interactions et calculs dynamiques
-PHP 8+ -- Logique Serveur et accès BDD
+>> HTML5 -- Pour la structure des pages
+>> CSS3 -- Pour la mise en forme et le resonsive web design
+>> JS -- Interactions et calculs dynamiques
+>> PHP 8+ -- Logique Serveur et accès BDD
 
 ---
 
