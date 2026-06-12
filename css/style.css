@@ -52,6 +52,7 @@ header .container {
     padding: 8px 16px;
     border-radius: 6px;
     font-size: 14px;
+    cursor: pointer;
     transition: background 0.2s;
 }
 
@@ -79,16 +80,28 @@ main .container {
     border-radius: 10px;
     padding: 28px 32px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    margin: 0 auto;          /* centrage horizontal du bloc */
 }
 
-#formapp { display: block; }
-#tableapp { display: none; }
+/* Par défaut : le formulaire est masqué, le tableau est affiché.
+   Le JavaScript bascule ensuite l'affichage via le menu. */
+#formapp {
+    display: none;
+    max-width: 600px;        /* formulaire compact et centré */
+}
+
+#tableapp {
+    display: block;
+    max-width: 1000px;       /* tableau plus large */
+    overflow-x: auto;        /* défilement horizontal si besoin */
+}
 
 h1 {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 12px;
     color: #1a73e8;
+    text-align: center;
 }
 
 hr {
@@ -120,7 +133,7 @@ form input[type="number"],
 form input[type="date"],
 form select {
     width: 100%;
-    max-width: 480px;
+    max-width: 100%;         /* remplit le bloc centré */
     padding: 9px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -152,6 +165,7 @@ p.submit {
     display: flex;
     gap: 12px;
     margin-top: 24px;
+    justify-content: center;   /* boutons centrés */
 }
 
 input[type="reset"],
@@ -198,6 +212,7 @@ table {
     border-collapse: collapse;
     font-size: 14px;
     min-width: 700px;
+    margin: 0 auto;            /* tableau centré dans le bloc */
 }
 
 thead tr {
