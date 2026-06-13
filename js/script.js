@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     // Récupération des blocs et des liens du menu
-    const formapp = document.getElementById('formapp');
-    const tableapp = document.getElementById('tableapp');
+    const formapp = document.querySelector('#formapp');
+    const tableapp = document.querySelector('#tableapp');
 
     const menuLinks = document.querySelectorAll('#menu a');
     const lienAjouter = menuLinks[0];   // "Ajouter une facture"
@@ -38,6 +38,34 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         afficherTableau();
     });
+
+    // ─────────────────────────────────────────────────────────────
+    //  UTILITAIRES
+    // ─────────────────────────────────────────────────────────────
+    function setField(name, value) {
+        const el = document.querySelector(`[name="${name}"]`);
+        if (el) el.value = value;
+    }
+    
+    function clearForm() {
+        document.querySelector('#form_add').reset();
+        setField('idfacture', '');
+        document.querySelector('#valider').value = 'Valider';
+    }
+
+    function showSection(target) {
+        formapp.style.display  = target === 'form'  ? 'block' : 'none';
+        tableapp.style.display = target === 'table' ? 'block' : 'none';
+        menuLinks.forEach(l => {
+            l.classList.toggle('active', l.dataset.target === target);
+        });
+    }
+
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        const [y, m, d] = dateStr.split('-');
+        return `${d}/${m}/${y}`;
+    }
 
 
     // ─────────────────────────────────────────────────────────────
@@ -98,8 +126,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const status= root?.querySelector('status')?.textContent
             const content= root?.querySelector('content')?.textContent
             sendMessage(status, content);
+
+            if (status === 'success') {
+                //clearForm();
+                showSection('table');
+            }
         }
         xhttp.onerror= function() {
+            animOff();
             sendMessage('error', 'Impossible de joindre le serveur!!!');
         }
 

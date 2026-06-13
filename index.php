@@ -30,6 +30,8 @@
                 <h1>Ajouter une facture</h1>
                 <hr />
                 <form name="form_add" id="form_add" metod="POST" action="#">
+                    <input type="hidden" name="idfacture" id="idfacture" value="" readonly />
+
                     <p class="field">
                         <label for="client">Client <span class="required">*</span></label>
                         <br />
@@ -163,7 +165,7 @@
     <!-- ─── NOTIFICATION (toast) ─────────────────────────────── -->
     <div id="toast"></div>
  
-    
+
     <!-- ─── LOADER ───────────────────────────────────────────── -->
     <div id="loader">
         <div class="spinner"></div>
