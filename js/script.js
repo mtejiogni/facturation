@@ -205,10 +205,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td>${datefacture}</td>
                         <td>
                             <a class="btn-edit" href="#">
-                                Modifier
+                                <span><i class="fa fa-pencil"></i></span>
                             </a>
                             <a class="btn-delete" href="#">
-                                Supprimer
+                                <span><i class="fa fa-trash"></i></span>
                             </a>
                         </td>
                     `;

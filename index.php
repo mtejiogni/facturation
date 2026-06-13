@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des factures</title>
 
-    <link rel="stylesheet" href="node_modules/@fortawesome/css/all.min.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -130,10 +130,10 @@
                             <td>26/05/2026</td>
                             <td>
                                 <a class="btn-edit" href="#">
-                                    Modifier
+                                    <span><i class="fa fa-pencil"></i></span>
                                 </a>
                                 <a class="btn-delete" href="#">
-                                    Supprimer
+                                    <span><i class="fa fa-trash"></i></span>
                                 </a>
                             </td>
                         </tr>
@@ -174,7 +174,7 @@
 
 
 
-    <script type="text/javascript" src="node_modules/@fortawesome/js/all.min.js"></script>
+    <script type="text/javascript" src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
