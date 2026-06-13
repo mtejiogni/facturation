@@ -43,7 +43,7 @@ if($action == 'readall') {
     $factures= $req->fetchAll();
 
     if(empty($factures) == true) {
-        echo Database::getMessageXML('success', 'Aucune facture trouvée');
+        echo Database::getMessageXML('warning', 'Aucune facture trouvée');
     }
     else {
         echo Database::getAllDatasXML('facture', $factures);

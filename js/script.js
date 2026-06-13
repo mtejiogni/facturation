@@ -121,15 +121,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const xml= xhttp.responseXML;
             // On recupere la balise racine
             const root= xml?.documentElement;
-            console.log(root);
+            console.log('response data : ', root);
             // On recupere les donnees
             const status= root?.querySelector('status')?.textContent
             const content= root?.querySelector('content')?.textContent
             sendMessage(status, content);
 
             if (status === 'success') {
-                //clearForm();
+                clearForm();
                 showSection('table');
+                readAll();
             }
         }
         xhttp.onerror= function() {
@@ -139,5 +140,88 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return false;
     }
+
+
+
+
+    // Liste des factures
+    function readAll() {
+        animOn();
+        const formdata= new FormData();
+        formdata.append('action', 'readall');
+
+        const xhttp= new XMLHttpRequest();
+        xhttp.open('POST', API_URL, true);
+        xhttp.send(formdata);
+        xhttp.onload= function() {
+            animOff();
+            // On recupere la reponse XML
+            const xml= xhttp.responseXML;
+            // On recupere la balise racine
+            const root= xml?.documentElement;
+            console.log('response data : ', root);
+            
+            // On recupere les donnees
+            const status= root?.querySelector('status')?.textContent ?? '';
+            const content= root?.querySelector('content')?.textContent ?? '';
+            if (status === 'warning') {
+                sendMessage(status, content);
+            }
+
+            const factures= Array.from(root?.querySelectorAll('facture') ?? []);
+            const tbody= document.querySelector('#tableapp table tbody');
+            tbody.innerHTML= '';
+            if(factures.length === 0) {
+                tbody.innerHTML= `
+                    <tr>
+                        <td colspan="10" style="text-align:center;padding:20px;color:#888">
+                            Aucune facture trouvée
+                        </td>
+                    </tr>
+                `;
+            }
+            else {
+                for(let i= 0; i< factures.length; i++) {
+                    let idfacture= parseInt(factures[i].querySelector('idfacture').textContent);
+                    let reference= factures[i].querySelector('reference').textContent;
+                    let client= factures[i].querySelector('client').textContent;
+                    let telephone= factures[i].querySelector('telephone').textContent;
+                    let produit= factures[i].querySelector('produit').textContent;
+                    let pu= parseFloat(factures[i].querySelector('pu').textContent);
+                    let qte= parseInt(factures[i].querySelector('qte').textContent);
+                    let montant= pu * qte;
+                    let datefacture= formatDate(factures[i].querySelector('datefacture').textContent);
+
+                    const tr= document.createElement('tr');
+                    tr.innerHTML= `
+                        <td>${i+1}</td>
+                        <td>${reference}</td>
+                        <td>${client}</td>
+                        <td>${telephone}</td>
+                        <td>${produit}</td>
+                        <td>${pu}</td>
+                        <td>${qte}</td>
+                        <td>${montant}</td>
+                        <td>${datefacture}</td>
+                        <td>
+                            <a class="btn-edit" href="#">
+                                Modifier
+                            </a>
+                            <a class="btn-delete" href="#">
+                                Supprimer
+                            </a>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            }
+        }
+        xhttp.onerror= function() {
+            animOff();
+            sendMessage('error', 'Impossible de joindre le serveur!!!');
+        }
+    }
+
+    readAll();
 
 });
