@@ -55,7 +55,7 @@ if($action == 'readall') {
 
 // Ajouter
 if($action == 'create') {
-    $reference= $_REQUEST['reference'];
+    $reference= 'INSAM' . date('dmY') . rand(1, 10000);
     $client= $_REQUEST['client'];
     $telehone= $_REQUEST['telephone'];
     $produit= $_REQUEST['produit'];

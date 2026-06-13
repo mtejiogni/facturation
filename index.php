@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des factures</title>
 
+    <link rel="stylesheet" href="node_modules/@fortawesome/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -28,7 +29,7 @@
             <div id="formapp">
                 <h1>Ajouter une facture</h1>
                 <hr />
-                <form name="form_add" metod="POST" action="#">
+                <form name="form_add" id="form_add" metod="POST" action="#">
                     <p class="field">
                         <label for="client">Client <span class="required">*</span></label>
                         <br />
@@ -96,7 +97,7 @@
 
             
             <div id="tableapp">
-                <h1>Liste des factures</h1>
+                <h1><i class="fas fa-users"></i> Liste des factures</h1>
                 <hr />
                 <table border="1" cellspacing="0" cellpadding="4">
                     <thead>
@@ -126,8 +127,12 @@
                             <td>4000</td>
                             <td>26/05/2026</td>
                             <td>
-                                <a href="#">Modifier</a>
-                                <a href="#">Supprimer</a>
+                                <a class="btn-edit" href="#">
+                                    Modifier
+                                </a>
+                                <a class="btn-delete" href="#">
+                                    Supprimer
+                                </a>
                             </td>
                         </tr>
                     </tbody>
@@ -152,6 +157,22 @@
         </div>
     </footer>
 
+
+
+
+    <!-- ─── NOTIFICATION (toast) ─────────────────────────────── -->
+    <div id="toast"></div>
+ 
+    
+    <!-- ─── LOADER ───────────────────────────────────────────── -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+
+
+
+    <script type="text/javascript" src="node_modules/@fortawesome/js/all.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

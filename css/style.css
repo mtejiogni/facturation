@@ -222,7 +222,7 @@ thead tr {
 
 thead th {
     padding: 12px 14px;
-    text-align: left;
+    text-align: center;
     font-weight: 600;
     font-size: 13px;
     letter-spacing: 0.3px;
@@ -271,10 +271,12 @@ tbody td a.btn-delete:hover {
     background: #fdecea;
 }
 
+
+
 /* ─── NOTIFICATION (toast) ───────────────────────────────── */
 #toast {
     position: fixed;
-    bottom: 30px;
+    top: 70px;
     right: 30px;
     padding: 12px 22px;
     border-radius: 8px;
@@ -291,12 +293,14 @@ tbody td a.btn-delete:hover {
 #toast.success { background-color: #2e7d32; }
 #toast.error   { background-color: #c62828; }
 
+
+
 /* ─── LOADER ─────────────────────────────────────────────── */
 #loader {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(255,255,255,0.6);
+    background: rgba(0,0,0,0.2);
     z-index: 9998;
     align-items: center;
     justify-content: center;

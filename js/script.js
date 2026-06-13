@@ -39,4 +39,71 @@ document.addEventListener('DOMContentLoaded', function () {
         afficherTableau();
     });
 
+
+    // ─────────────────────────────────────────────────────────────
+    //  LOADER
+    // ─────────────────────────────────────────────────────────────
+    const loader = document.querySelector('#loader');
+    function animOn()  { 
+        loader.classList.add('active'); 
+    }
+    function animOff() { 
+        loader.classList.remove('active'); 
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  TOAST
+    // ─────────────────────────────────────────────────────────────
+    const toast = document.querySelector('#toast');
+    let toastTimer;
+
+    function sendMessage(status, content) {
+        clearTimeout(toastTimer);
+        toast.textContent = content;
+        toast.className   = 'show ' + (status === 'success' ? 'success' : 'error');
+        toastTimer = setTimeout(() => { 
+            toast.className = ''; 
+        }, 5000);
+    }
+
+
+
+
+
+
+
+    // Consommation de l'API PHP
+    // ==========================
+    const API_URL= 'http://localhost/facturation/api/routes.php';
+
+
+
+    // Ajouter une facture
+    document.querySelector('#form_add').onsubmit= function() {
+        animOn();
+        const formdata= new FormData(this);
+        formdata.append('action', 'create');
+
+        const xhttp= new XMLHttpRequest();
+        xhttp.open('POST', API_URL, true);
+        xhttp.send(formdata);
+        xhttp.onload= function() {
+            animOff();
+            // On recupere la reponse XML
+            const xml= xhttp.responseXML;
+            // On recupere la balise racine
+            const root= xml?.documentElement;
+            console.log(root);
+            // On recupere les donnees
+            const status= root?.querySelector('status')?.textContent
+            const content= root?.querySelector('content')?.textContent
+            sendMessage(status, content);
+        }
+        xhttp.onerror= function() {
+            sendMessage('error', 'Impossible de joindre le serveur!!!');
+        }
+
+        return false;
+    }
+
 });
